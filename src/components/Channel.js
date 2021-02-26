@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import firebase from 'firebase/app';
+import { Message } from './Message';
 
 const Channel = ({user=null, db=null}) => {
     const [messages, setmessages] = useState([]);
     const [newMessage, setnewMessage] = useState('');
-    const [ uid, displayName, photoURL ] =user
+    const { uid, displayName, photoURL }= user;
     useEffect(() => {
         if( db ){
             const unsuscribe = db
@@ -47,7 +48,7 @@ const Channel = ({user=null, db=null}) => {
     <>
         <ul>
             {messages.map( message => (
-                <li key={message.id}>{message.text}</li>
+                <li key={message.id}><Message {...message} /></li>
             ))}
         </ul>
 
