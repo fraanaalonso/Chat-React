@@ -49,23 +49,28 @@ const Channel = ({user=null, db=null}) => {
 
     return (
     <>
-        <ul>
-            {messages.map( message => (
-                <li key={message.id}><Message {...message} /></li>
-            ))}
-        </ul>
+        <div className="flex flex-col h-full">
+            <ul>
+                {messages.map( message => (
+                    <li key={message.id}><Message {...message} /></li>
+                ))}
+            </ul>
+            <div className="mb-6 mx-4">
+                <form
+                className="flex flex-row bg-gray-200 dark:bg-coolDark-400 rounded-md px-4 py-3 z-10 max-w-screen-lg mx-auto dark:text-white shadow-md"
+                onSubmit={ handleSubmit }>
+                    <input
+                        className="flex-1 bg-transparent outline-none"
+                        value={newMessage}
+                        onChange={handleOnChange}
+                        placeholder="Escribe aquí tu mensaje"
+                    />
 
-        <form onSubmit={ handleSubmit }>
-            <input
-                class="focus:ring-2 focus:ring-blue-600"
-                value={newMessage}
-                onChange={handleOnChange}
-                placeholder="Escribe aquí tu mensaje"
-            />
+                    <button className="uppercase font-semibold text-sm tracking-wider text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors" type="submit" disabled={!newMessage}>Enviar</button>
 
-            <button class="bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50" type="submit" disabled={!newMessage}>Enviar</button>
-
-        </form>
+                </form>
+            </div>
+        </div>
     </>
     );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
@@ -49,6 +49,28 @@ function App() {
     }
   };
 
+  const signInWithGithub = async() => {
+    const provider = new firebase.auth.GithubAuthProvider();
+    auth.useDeviceLanguage();
+
+    try {
+      await auth.signInWithPopup(provider);
+    }catch( error ){
+      console.log( error )
+    }
+  }
+
+  const signInWithFacebook = async() => {
+      const provider = new firebase.auth.FacebookAuthProvider();
+      auth.useDeviceLanguage();
+
+      try{
+        await auth.signInWithPopup(provider);
+      }catch( error ){
+        console.log( error );
+      }
+  }
+
   const signOut = async() => {
     try{
       await firebase.auth().signOut();
@@ -72,8 +94,12 @@ function App() {
       </>
       
       : 
-      
-      <Button  onClick={signInWithGoogle}>Inicia Sesión con Google</Button>}
+      <Fragment>
+        <Button  onClick={signInWithGoogle}>Sign Up with Google</Button>
+        <Button  onClick={signInWithGithub}>Sign Up with GitHub</Button>
+        <Button  onClick={signInWithFacebook}>Sign Up with Facebook</Button>
+      </Fragment>
+      }
     </div>
   );
 }
