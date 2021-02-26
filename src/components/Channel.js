@@ -26,6 +26,7 @@ const Channel = ({user=null, db=null}) => {
 
     const handleOnChange = (e) => {
         setnewMessage(e.target.value);
+        
     }
 
     const handleSubmit = (e) => {
@@ -42,6 +43,8 @@ const Channel = ({user=null, db=null}) => {
             }
             )
         }
+
+        setnewMessage('');
     }
 
     return (
@@ -54,13 +57,13 @@ const Channel = ({user=null, db=null}) => {
 
         <form onSubmit={ handleSubmit }>
             <input
-                type="text"
+                class="focus:ring-2 focus:ring-blue-600"
                 value={newMessage}
                 onChange={handleOnChange}
                 placeholder="Escribe aquí tu mensaje"
             />
 
-            <button type="submit" disabled={!newMessage}>Enviar</button>
+            <button class="bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50" type="submit" disabled={!newMessage}>Enviar</button>
 
         </form>
     </>
